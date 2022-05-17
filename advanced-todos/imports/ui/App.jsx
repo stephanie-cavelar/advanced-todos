@@ -6,7 +6,7 @@ import { TasksCollection } from '/imports/api/TasksCollection';
 import { Task } from './Task';
 import { TaskForm } from './TaskForm';
 import { LoginForm } from './LoginForm';
-import { SignInForm } from './SignInForm';
+//import { SignInForm } from './SignInForm';
 
 const toggleChecked = ({ _id, isChecked }) => {
   TasksCollection.update(_id, {
