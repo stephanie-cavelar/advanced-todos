@@ -3,7 +3,7 @@ import { TasksCollection } from '/imports/api/TasksCollection';
 
 export const TaskForm = ({user}) => {
   const [text, setText] = useState('');
-
+  const [criador, setCriador] = useState('');
   const handleSubmit = e => {
     e.preventDefault();
 
@@ -12,7 +12,8 @@ export const TaskForm = ({user}) => {
     TasksCollection.insert({
       text: text.trim(),
       createdAt: new Date(),
-      userId: user._id
+      userId: user._id,
+      criador: user.username
     });
 
     setText('');
@@ -24,6 +25,7 @@ export const TaskForm = ({user}) => {
         type="text"
         placeholder="Type to add new tasks"
         value={text}
+        teste={"lol"}
         onChange={e => setText(e.target.value)}
       />
 
