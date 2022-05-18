@@ -16,6 +16,7 @@ const toggleChecked = ({ _id, isChecked }) => {
   });
 };
 
+
 const deleteTask = ({ _id }) => TasksCollection.remove(_id);
 
 export const App = () => {
@@ -34,12 +35,14 @@ export const App = () => {
       return [];
     }
 
-    return TasksCollection.find(
-      hideCompleted ? pendingOnlyFilter : {},
+      return TasksCollection.find(
+      usuario ?  userFilter: {},
       {
         sort: { createdAt: -1 },
       }
     ).fetch();
+
+
   });
 
   const pendingTasksCount = useTracker(() => {
@@ -78,14 +81,15 @@ export const App = () => {
 
             <TaskForm user={user} />
 
-            <div className="filter">
+            {/* <div className="filter">
               <button onClick={() => setHideCompleted(!hideCompleted)}>
                 {hideCompleted ? 'Show All' : 'Hide Completed'}
               </button>
-            </div>
+            </div> */}
+
             <div className="filter">
               <button onClick={() => setUserFilter(!usuario)}>
-                {usuario? 'Minhas tarefas' : 'todas as tarefas'}
+                {usuario? 'Mostrar todas as tarefas' : 'Minhas tarefas'}
               </button>
             </div>
 
@@ -96,6 +100,7 @@ export const App = () => {
                   task={task}
                   onCheckboxClick={toggleChecked}
                   onDeleteClick={deleteTask}
+                  criador = {user.username}
                 />
               ))}
             </ul>
